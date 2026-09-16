@@ -1,0 +1,36 @@
+/* "Get product" button injected into product cards. !important guards against marketplace CSS.
+ * Overlaid on top of the card's own image: appending it after the card content pushed it next to
+ * the following row, where it looked like it belonged to the card below. */
+.pcx-get-btn {
+  all: unset !important;
+  box-sizing: border-box !important;
+  display: block !important;
+  position: absolute !important;
+  top: 8px !important;
+  left: 8px !important;
+  right: 8px !important;
+  width: auto !important;
+  z-index: 2147483000 !important;
+  padding: 8px 10px !important;
+  border-radius: 6px !important;
+  background: rgba(17, 17, 17, 0.92) !important;
+  color: #fff !important;
+  font: 600 13px/1.2 -apple-system, "Segoe UI", Roboto, Arial, sans-serif !important;
+  letter-spacing: 0.2px !important;
+  text-align: center !important;
+  cursor: pointer !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35) !important;
+}
+
+.pcx-get-btn:hover {
+  background: #0f9488 !important;
+}
+
+.pcx-get-btn.pcx-saved {
+  background: #0f766e !important;
+}
+
+.pcx-get-btn:disabled {
+  opacity: 0.6 !important;
+  cursor: progress !important;
+}

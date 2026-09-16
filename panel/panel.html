@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>POD Crawler</title>
+  <link rel="stylesheet" href="panel.css">
+</head>
+<body>
+  <header class="top">
+    <div class="brand-row">
+      <div class="brand">
+        <img src="../icons/icon48.png" alt="" class="logo">
+        <h1>POD Crawler</h1>
+      </div>
+      <span class="version" id="version"></span>
+    </div>
+    <nav class="sites">
+      <a class="site-logo amazon" href="https://www.amazon.com" target="_blank" rel="noopener">amazon</a>
+      <a class="site-logo etsy" href="https://www.etsy.com" target="_blank" rel="noopener">Etsy</a>
+      <a class="site-logo redbubble" href="https://www.redbubble.com" target="_blank" rel="noopener">REDBUBBLE</a>
+      <a class="site-logo ebay" href="https://www.ebay.com" target="_blank" rel="noopener"><b>e</b><b>b</b><b>a</b><b>y</b></a>
+      <a class="site-logo shein" href="https://www.shein.com" target="_blank" rel="noopener">SHEIN</a>
+      <a class="site-logo aliexpress" href="https://www.aliexpress.com" target="_blank" rel="noopener">AliExpress</a>
+      <a class="site-logo tiktok" href="https://shop.tiktok.com" target="_blank" rel="noopener">TikTok</a>
+    </nav>
+  </header>
+
+  <div class="welcome" id="welcome"></div>
+
+  <main>
+    <section id="loginView" hidden>
+      <form id="loginForm" class="login">
+        <label>API Key
+          <input id="apiKey" autocomplete="off" spellcheck="false" placeholder="tks_... (lấy ở mục Tài khoản → API key extension)">
+        </label>
+        <label>Server URL <span class="muted">(máy chủ nhận dữ liệu đồng bộ)</span>
+          <input id="serverUrl" type="url" spellcheck="false" placeholder="http://localhost:9000">
+        </label>
+        <div class="login-actions">
+          <button class="btn primary" type="submit" id="btnLogin">Đăng nhập</button>
+          <button class="btn outline" type="button" id="btnOffline">Dùng offline (không đồng bộ)</button>
+        </div>
+        <p class="error" id="loginError" hidden></p>
+      </form>
+    </section>
+
+    <section id="mainView" hidden>
+      <div class="actions">
+        <button class="btn primary" id="btnGetAll">Lấy tất cả sản phẩm</button>
+        <button class="btn danger" id="btnDeleteAll">Xoá tất cả (0)</button>
+        <button class="btn muted-btn" id="btnDedupe">Xoá trùng lặp (0)</button>
+        <div class="dropdown">
+          <button class="btn outline" id="btnExport">Xuất sản phẩm (0) ▾</button>
+          <div class="menu" id="exportMenu" hidden>
+            <button type="button" data-export="csv">File CSV (mở bằng Excel)</button>
+            <button type="button" data-export="json">File JSON</button>
+            <button type="button" data-export="images">Tải toàn bộ ảnh</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="filters">
+        <input id="search" type="search" placeholder="Tìm theo tên, shop, ID...">
+        <select id="siteFilter">
+          <option value="">Tất cả sàn</option>
+        </select>
+      </div>
+
+      <ul class="products" id="list"></ul>
+      <p class="empty" id="empty" hidden></p>
+      <button class="btn outline more" id="btnMore" hidden>Xem thêm</button>
+    </section>
+  </main>
+
+  <footer class="bottom" id="footer" hidden>
+    <button class="btn outline" id="btnTop">Lên đầu trang</button>
+    <button class="btn primary" id="btnSync">Đồng bộ lên server (0)</button>
+  </footer>
+
+  <dialog id="editDialog">
+    <form id="editForm" class="edit">
+      <h2>Sửa sản phẩm</h2>
+      <label>Tiêu đề
+        <textarea name="title" rows="2" required></textarea>
+      </label>
+      <div class="grid2">
+        <label>Giá <input name="price" type="number" step="any" min="0"></label>
+        <label>Tiền tệ <input name="currency" placeholder="USD, VND..."></label>
+      </div>
+      <label>Shop <input name="shop"></label>
+      <label>Tags <span class="muted">(phân cách bằng dấu phẩy)</span> <input name="tags"></label>
+      <label>Mô tả <textarea name="description" rows="5"></textarea></label>
+      <div class="field-label">Ảnh (<span id="imgCount">0</span>) <span class="muted">— ảnh đầu tiên là ảnh chính</span></div>
+      <div class="images" id="editImages"></div>
+      <div class="add-image">
+        <input id="newImage" type="url" placeholder="Dán link ảnh...">
+        <button type="button" class="btn outline sm" id="btnAddImage">Thêm ảnh</button>
+      </div>
+      <div class="dialog-actions">
+        <button type="button" class="btn outline" id="btnCancelEdit">Huỷ</button>
+        <button type="submit" class="btn primary">Lưu</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="confirmDialog">
+    <p id="confirmText"></p>
+    <div class="dialog-actions">
+      <button type="button" class="btn outline" id="btnConfirmNo">Huỷ</button>
+      <button type="button" class="btn danger" id="btnConfirmYes">Đồng ý</button>
+    </div>
+  </dialog>
+
+  <div class="toast" id="toast" hidden></div>
+
+  <script src="../lib/common.js"></script>
+  <script src="panel.js"></script>
+</body>
+</html>

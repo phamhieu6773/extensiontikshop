@@ -1,0 +1,163 @@
+:root {
+  --teal: #0f9488;
+  --teal-dark: #0d7c72;
+  --red: #ef5350;
+  --red-dark: #dc2626;
+  --text: #1f2937;
+  --muted: #6b7280;
+  --line: #e5e7eb;
+  --bg-soft: #f6f7f9;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  background: #fff;
+  color: var(--text);
+  font: 14px/1.45 -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+body { padding: 20px 24px 0; min-height: 100vh; display: flex; flex-direction: column; }
+main { flex: 1; }
+[hidden] { display: none !important; }
+.muted { color: var(--muted); font-weight: 400; }
+
+/* ---------- header ---------- */
+.brand-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.brand { display: flex; align-items: center; gap: 10px; }
+.logo { width: 32px; height: 32px; border-radius: 8px; }
+.brand h1 { margin: 0; font-size: 22px; font-weight: 700; }
+.version { color: var(--muted); font-size: 13px; }
+
+.sites { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; margin: 14px 0 16px; }
+.site-logo { text-decoration: none; font-weight: 700; font-size: 17px; line-height: 1; transition: opacity .15s; }
+.site-logo:hover { opacity: .7; }
+.site-logo.amazon { color: #111; font-family: Arial, sans-serif; letter-spacing: -.3px; }
+.site-logo.etsy { color: #f1641e; font-family: Georgia, serif; font-size: 19px; }
+.site-logo.redbubble { color: #e41321; font-size: 14px; letter-spacing: .5px; }
+.site-logo.ebay b { font-size: 19px; letter-spacing: -1px; }
+.site-logo.ebay b:nth-child(1) { color: #e53238; }
+.site-logo.ebay b:nth-child(2) { color: #0064d2; }
+.site-logo.ebay b:nth-child(3) { color: #f5af02; }
+.site-logo.ebay b:nth-child(4) { color: #86b817; }
+.site-logo.shein { color: #111; letter-spacing: 2px; font-size: 15px; }
+.site-logo.aliexpress { color: #e62e04; font-weight: 600; }
+.site-logo.tiktok { color: #111; }
+
+.welcome {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 12px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); margin-bottom: 16px;
+}
+.welcome b { color: var(--teal); font-weight: 600; }
+.link-btn { background: none; border: 0; color: var(--teal); cursor: pointer; font: inherit; padding: 0; }
+.link-btn:hover { text-decoration: underline; }
+
+/* ---------- buttons & inputs ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  padding: 9px 16px; border-radius: 4px; border: 1px solid transparent;
+  font: 500 14px/1.2 inherit; font-family: inherit; cursor: pointer; white-space: nowrap;
+  transition: background .15s, border-color .15s, opacity .15s;
+}
+.btn:disabled { opacity: .5; cursor: not-allowed; }
+.btn.primary { background: var(--teal); color: #fff; }
+.btn.primary:not(:disabled):hover { background: var(--teal-dark); }
+.btn.danger { background: var(--red); color: #fff; }
+.btn.danger:not(:disabled):hover { background: var(--red-dark); }
+.btn.outline { background: #fff; color: var(--teal); border-color: var(--teal); }
+.btn.outline:not(:disabled):hover { background: #f0fdfa; }
+.btn.muted-btn { background: #e5e7eb; color: #374151; }
+.btn.muted-btn:not(:disabled):hover { background: #d1d5db; }
+.btn.sm { padding: 6px 12px; font-size: 13px; }
+
+input, textarea, select {
+  width: 100%; padding: 8px 10px; border: 1px solid #d1d5db; border-radius: 4px;
+  font: inherit; color: inherit; background: #fff;
+}
+input:focus, textarea:focus, select:focus { outline: 2px solid rgba(15, 148, 136, .35); border-color: var(--teal); }
+label { display: block; font-weight: 600; margin-bottom: 12px; }
+label input, label textarea, label select { margin-top: 4px; font-weight: 400; }
+
+/* ---------- login ---------- */
+.login { max-width: 640px; }
+.login-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+.error { color: var(--red-dark); margin: 12px 0 0; }
+
+/* ---------- main ---------- */
+.actions { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 12px; }
+.dropdown { position: relative; }
+.menu {
+  position: absolute; top: calc(100% + 4px); left: 0; z-index: 10; min-width: 220px;
+  background: #fff; border: 1px solid var(--line); border-radius: 6px; box-shadow: 0 8px 24px rgba(0,0,0,.12); padding: 4px;
+}
+.menu button { display: block; width: 100%; text-align: left; padding: 9px 12px; background: none; border: 0; border-radius: 4px; font: inherit; cursor: pointer; }
+.menu button:hover { background: var(--bg-soft); }
+
+.filters { display: flex; gap: 10px; margin-bottom: 8px; }
+.filters select { width: 160px; flex-shrink: 0; }
+
+.products { list-style: none; margin: 0; padding: 0; }
+.product { display: flex; gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+.thumb {
+  flex-shrink: 0; width: 110px; height: 110px; border-radius: 4px; overflow: hidden;
+  background: var(--bg-soft); display: grid; place-items: center; color: var(--muted); font-size: 12px; text-decoration: none;
+}
+.thumb img { width: 100%; height: 100%; object-fit: cover; }
+.info { min-width: 0; flex: 1; }
+.title {
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  color: #111; font-weight: 700; text-decoration: none;
+}
+.title:hover { color: var(--teal); }
+.meta { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; margin: 4px 0; font-size: 12px; }
+.tag { padding: 1px 6px; border-radius: 3px; background: var(--bg-soft); color: var(--muted); font-size: 11px; font-weight: 600; text-transform: uppercase; }
+.tag.ok { background: #dcfce7; color: #15803d; }
+.tag.edited { background: #fef3c7; color: #b45309; }
+.price { font-weight: 700; color: #15803d; font-size: 13px; }
+.stars { color: #f59e0b; letter-spacing: 1px; font-size: 15px; }
+.rating-row { font-size: 12px; margin-bottom: 6px; }
+.row-actions { display: flex; gap: 8px; margin-top: 6px; }
+
+.empty { text-align: center; color: var(--muted); padding: 40px 0; }
+.more { display: flex; margin: 16px auto; }
+
+/* ---------- footer ---------- */
+.bottom {
+  position: sticky; bottom: 0; display: flex; justify-content: flex-end; gap: 10px;
+  margin: 16px -24px 0; padding: 12px 24px; background: #fff; border-top: 1px solid var(--line);
+}
+
+/* ---------- dialogs ---------- */
+dialog { border: 0; border-radius: 8px; padding: 20px 22px; width: min(640px, calc(100vw - 32px)); box-shadow: 0 20px 50px rgba(0,0,0,.25); }
+dialog::backdrop { background: rgba(0,0,0,.4); }
+dialog h2 { margin: 0 0 14px; font-size: 18px; }
+#confirmDialog { width: min(420px, calc(100vw - 32px)); }
+#confirmText { margin: 0 0 16px; font-size: 15px; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.field-label { font-weight: 600; margin-bottom: 6px; }
+.images { display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 8px; margin-bottom: 8px; }
+.img-item { position: relative; aspect-ratio: 1; border-radius: 4px; overflow: hidden; background: var(--bg-soft); border: 2px solid transparent; }
+.img-item.main { border-color: var(--teal); }
+.img-item img { width: 100%; height: 100%; object-fit: cover; }
+.img-item .img-actions { position: absolute; inset: auto 0 0 0; display: flex; justify-content: space-between; padding: 3px; background: linear-gradient(transparent, rgba(0,0,0,.55)); }
+.img-item button { border: 0; border-radius: 3px; padding: 2px 6px; font-size: 11px; cursor: pointer; background: rgba(255,255,255,.9); }
+.img-item button.remove { background: var(--red); color: #fff; }
+.add-image { display: flex; gap: 8px; margin-bottom: 16px; }
+.dialog-actions { display: flex; justify-content: flex-end; gap: 10px; }
+
+/* ---------- toast ---------- */
+.toast {
+  position: fixed; left: 50%; bottom: 76px; transform: translateX(-50%); max-width: calc(100vw - 48px);
+  padding: 10px 18px; border-radius: 8px; background: #0f766e; color: #fff; font-weight: 500;
+  box-shadow: 0 6px 20px rgba(0,0,0,.2); z-index: 100; text-align: center;
+}
+.toast.error { background: var(--red-dark); }
+
+@media (max-width: 480px) {
+  body { padding: 16px 16px 0; }
+  .bottom { margin: 16px -16px 0; padding: 12px 16px; }
+  .thumb { width: 80px; height: 80px; }
+  .filters { flex-direction: column; }
+  .filters select { width: 100%; }
+}
