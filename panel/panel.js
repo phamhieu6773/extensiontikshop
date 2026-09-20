@@ -208,7 +208,7 @@ $('loginForm').addEventListener('submit', async (e) => {
   button.disabled = true;
   button.textContent = 'Đang đăng nhập...';
   try {
-    await send('LOGIN', { apiKey: $('apiKey').value, serverUrl: $('serverUrl').value });
+    await send('LOGIN', { apiKey: $('apiKey').value });
     $('apiKey').value = '';
   } catch (err) {
     errorEl.textContent = err.message;
@@ -402,10 +402,9 @@ $('editForm').addEventListener('submit', async (e) => {
 // ---------- init ----------
 async function init() {
   $('version').textContent = `v${chrome.runtime.getManifest().version}`;
-  const data = await chrome.storage.local.get(['products', 'auth', 'lastServerUrl']);
+  const data = await chrome.storage.local.get(['products', 'auth']);
   state.products = data.products || [];
   state.auth = data.auth || null;
-  if (data.lastServerUrl) $('serverUrl').value = data.lastServerUrl;
   render();
 }
 

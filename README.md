@@ -16,7 +16,7 @@ Sau khi sửa code: vào `chrome://extensions` → bấm nút ⟳ trên extensio
 
 - **Nút tròn xanh** ở góc phải trang: mở/đóng panel (hoặc bấm icon extension trên thanh công cụ).
   Panel luôn nổi ngay trên trang đang xem, trên mọi trang web. Riêng các trang của Chrome (`chrome://`, Chrome Web Store) không cho chèn giao diện nên panel mở ở thanh bên (Side Panel).
-- **Đăng nhập**: nhập API Key + Server URL (lấy trên web TikShop: menu **Tài khoản → API key extension**; dev là `http://localhost:9000`), hoặc bấm **Dùng offline** nếu chỉ cần lấy và xuất file.
+- **Đăng nhập**: nhập API Key (lấy trên web TikShop: menu **Tài khoản → API key extension**). Server URL được fix cứng trong hằng `SERVER_URL` ở `background.js` (`https://app.tiktrawl.com`; đổi sang `http://localhost:9000` khi chạy máy local), hoặc bấm **Dùng offline** nếu chỉ cần lấy và xuất file.
 - **⬇ Get product** trên ảnh mỗi sản phẩm: lưu sản phẩm đó. Extension tự mở trang chi tiết ở nền để lấy **đủ bộ ảnh**, nên mất một hai giây.
 - **⬇ Lấy sản phẩm này** (khi đang ở trang chi tiết sản phẩm): lưu ngay từ trang đang xem — đủ ảnh, mô tả.
 - **Lấy tất cả sản phẩm**: lưu mọi sản phẩm đang hiển thị trên trang (cuộn hết trang trước để trang tải đủ). Cũng lấy đủ ảnh từng sản phẩm, mỗi lúc 3 sản phẩm để sàn không chặn — trang nhiều sản phẩm sẽ chờ lâu hơn.

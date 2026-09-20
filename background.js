@@ -15,6 +15,9 @@ const getAuth = async () => (await chrome.storage.local.get('auth')).auth || nul
 // Các route dành cho extension trên backend TikShop (xác thực bằng API key)
 const API_BASE = '/api/v1/extension';
 
+// Máy chủ nhận dữ liệu đồng bộ — cố định, người dùng không cần nhập. Đổi khi deploy.
+const SERVER_URL = 'https://app.tiktrawl.com';
+
 function isEmpty(value) {
   return value === '' || value == null || (Array.isArray(value) && value.length === 0);
 }
@@ -136,18 +139,15 @@ const handlers = {
     return { found: products.length, ...(await handlers.SAVE_PRODUCTS({ products })) };
   },
 
-  async LOGIN({ apiKey, serverUrl, offline }) {
+  async LOGIN({ apiKey, offline }) {
     let auth;
     if (offline) {
       auth = { offline: true, name: 'Offline' };
     } else {
       apiKey = String(apiKey || '').trim();
-      serverUrl = String(serverUrl || '').trim().replace(/\/+$/, '');
       if (!apiKey) throw new Error('Vui lòng nhập API Key');
-      if (!/^https?:\/\//i.test(serverUrl)) throw new Error('Server URL phải bắt đầu bằng http:// hoặc https://');
-      const me = await api(serverUrl, apiKey, `${API_BASE}/me`);
-      auth = { offline: false, apiKey, serverUrl, name: me.name || me.username || 'User', plan: me.plan || '' };
-      await chrome.storage.local.set({ lastServerUrl: serverUrl });
+      const me = await api(SERVER_URL, apiKey, `${API_BASE}/me`);
+      auth = { offline: false, apiKey, serverUrl: SERVER_URL, name: me.name || me.username || 'User', plan: me.plan || '' };
     }
     await chrome.storage.local.set({ auth });
     return { auth };
@@ -165,7 +165,7 @@ const handlers = {
     let synced = 0;
     for (let i = 0; i < pending.length; i += 50) {
       const batch = pending.slice(i, i + 50);
-      await api(auth.serverUrl, auth.apiKey, `${API_BASE}/products`, { method: 'POST', body: { products: batch } });
+      await api(SERVER_URL, auth.apiKey, `${API_BASE}/products`, { method: 'POST', body: { products: batch } });
       const keys = new Set(batch.map((p) => p.key));
       const now = Date.now();
       await serial(async () => {
